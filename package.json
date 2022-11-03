@@ -1,0 +1,44 @@
+{
+  "name": "hammadkhanformsubmition",
+  "version": "1.0.0",
+  "description": "form submission",
+  "type": "module",
+  "main": "script.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hammadkhattak/form.git"
+  },
+  "prisma": {
+    "schema": "src/prisma/schema.prisma"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hammadkhattak/form/issues"
+  },
+  "homepage": "https://github.com/hammadkhattak/form#readme",
+  "dependencies": {
+    "@prisma/client": "^4.5.0",
+    "body-parser": "^1.20.1",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "email-validator": "^2.0.4",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "express-list-endpoints": "^6.0.0",
+    "googleapis": "^109.0.0",
+    "http-errors": "^2.0.0",
+    "nodemailer": "^6.8.0",
+    "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "prisma": "^4.5.0"
+  }
+}
