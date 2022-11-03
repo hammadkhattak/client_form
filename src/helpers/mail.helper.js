@@ -16,44 +16,30 @@ const config = {
 	REDIRECT_URI: process.env.REDIRECT_URI,
 	REFRESH_TOKEN: process.env.REFRESH_TOKEN,
 	APP_EMAIL: process.env.APP_EMAIL,
-	APP_NAME: process.env.APP_NAME
+	APP_NAME: process.env.APP_NAME,
+	APP_PASSWORD: process.env.APP_PASSWORD,
 };
-const oAuth2Client = new google.Auth.OAuth2Client(
-	config.CLIENT_ID,
-	config.CLEINT_SECRET,
-	config.REDIRECT_URI
-);
-oAuth2Client.setCredentials({ refresh_token: config.REFRESH_TOKEN });
 async function sendMail(to, subject, text, html) {
 	try {
-		const accessToken = await oAuth2Client.getAccessToken();
-
 		const transport = nodemailer.createTransport({
 			service: 'gmail',
-			secure: true,
+			secure: false,
+			port: 465,
+			host: 'smtp.gmail.com',
 			auth: {
-				type: 'OAuth2',
 				user: config.APP_EMAIL,
-				clientId: config.APP_EMAIL,
-				clientSecret: config.CLEINT_SECRET,
-				refreshToken: config.REFRESH_TOKEN,
-				accessToken: accessToken,
+				pass: config.APP_PASSWORD
 			},
 		});
-
-
-
 		const mailOptions = {
-			from: '<' + config.APP_EMAIL + '>',
+			from: config.APP_EMAIL,
 			to,
 			subject,
 			text,
 			html,
 		};
-
-
-		const result = await transport.sendMail(mailOptions);
-		return result;
+		const res = await transport.sendMail(mailOptions);
+		return res;
 	} catch (error) {
 		return error;
 	}

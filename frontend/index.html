@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="assets/style.css" />
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -42,7 +43,7 @@
         </div>
       </div>
       <div class="form-outer">
-        <form action="#">
+        <form>
           <div class="page slide-page">
             <div class="title">Choose</div>
             <div class="field">
@@ -151,18 +152,17 @@
           </div>
 
           <div class="page">
-            <form action="/post" method="post">
-              <p class="otp-text">Enter OTP</p>
-              <input
-                type="text"
-                autocomplete="one-time-code"
-                inputmode="numeric"
-                id="txtOtp"
-                name="one-time-code"
-                class="otp"
-              />
-              <!-- <input type="submit" value="Submit" class="submit-btn"> -->
-            </form>
+            <p class="otp-text">Enter OTP</p>
+            <input
+              type="text"
+              autocomplete="one-time-code"
+              inputmode="numeric"
+              id="txtOtp"
+              name="one-time-code"
+              class="otp"
+            />
+            <!-- <input type="submit" value="Submit" class="submit-btn"> -->
+
             <!-- <div class="title">Login Details:</div>
             <div class="field">
               <div class="label">Username</div>
@@ -174,9 +174,7 @@
             </div> -->
             <div class="field btns">
               <button class="prev-3 prev">Previous</button>
-              <button class="submit" onclick="checkEmailVerification()">
-                Submit
-              </button>
+              <button class="submit" type="button">Submit</button>
             </div>
           </div>
         </form>

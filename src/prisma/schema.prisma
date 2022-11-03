@@ -15,7 +15,6 @@ model User {
     name       String   @db.VarChar(255)
     phone      String   @db.VarChar(255)
     email      String   @unique @db.VarChar(255)
-    password   String   @db.Text
     otp        String   @db.Text
     isValidOtp Boolean  @default(false)
     created_at DateTime @default(now())

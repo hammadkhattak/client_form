@@ -11,6 +11,16 @@ const progressCheck = document.querySelectorAll(".step .check");
 const bullet = document.querySelectorAll(".step .bullet");
 let current = 1;
 
+var _email = '';
+
+const validateEmail = (email) => {
+	return String(email)
+		.toLowerCase()
+		.match(
+			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		);
+};
+
 nextBtnFirst.addEventListener("click", function (event) {
 	event.preventDefault();
 	slidePage.style.marginLeft = "-25%";
@@ -33,25 +43,38 @@ nextBtnSec.addEventListener("click", function (event) {
 
 
 
-nextBtnThird.addEventListener("click", function (event) {
+nextBtnThird.addEventListener("click", async function (event) {
 	event.preventDefault();
 
-	slidePage.style.marginLeft = "-75%";
-	bullet[current - 1].classList.add("active");
-	progressCheck[current - 1].classList.add("active");
-	progressText[current - 1].classList.add("active");
-	current += 1;
+	const email = $("#email").val();
+	const phone = $("#phone").val();
+	const name = $("#name").val();
 
-	const eEmail = $("#email");
-	const ePhone = $("#phone");
-	const eName = $("#name");
+	if (!validateEmail(email)) {
+		alert("Please enter a valid email address");
+		return;
+	}
 
+	_email = email;
 
-	fetch('http://example.com/movies.json')
-		.then((response) => response.json())
-		.then((data) => console.log(data));
+	try {
+		const response = await axios.post("http://localhost:3100/api/signup", { email, name, phone });
 
+		alert(response.data.message);
 
+		slidePage.style.marginLeft = "-75%";
+		bullet[current - 1].classList.add("active");
+		progressCheck[current - 1].classList.add("active");
+		progressText[current - 1].classList.add("active");
+		current += 1;
+		return;
+
+	} catch (error) {
+		console.log({ error });
+		console.log(error.response.data.message);
+		alert(error.response.data.message);
+		return;
+	}
 
 });
 
@@ -61,14 +84,14 @@ nextBtnThird.addEventListener("click", function (event) {
 
 
 submitBtn.addEventListener("click", function () {
-	bullet[current - 1].classList.add("active");
-	progressCheck[current - 1].classList.add("active");
-	progressText[current - 1].classList.add("active");
-	current += 1;
-	setTimeout(function () {
-		alert("Your Form Successfully Signed up");
-		location.reload();
-	}, 800);
+	// bullet[current - 1].classList.add("active");
+	// progressCheck[current - 1].classList.add("active");
+	// progressText[current - 1].classList.add("active");
+	// current += 1;
+	// setTimeout(function () {
+	// 	alert("Your Form Successfully Signed up");
+	// 	location.reload();
+	// }, 800);
 });
 
 prevBtnSec.addEventListener("click", function (event) {
@@ -105,16 +128,43 @@ function getRandomValue() {
 // assigning the random value to the hidden text
 document.getElementById("txtVerificationNo").value = getRandomValue();
 
-function checkEmailVerification() {
-	// e.preventDefault();
-	var verification_no = document.getElementById("txtVerificationNo").value;
-	var otp = document.getElementById("txtOtp").value;
-	if (parseInt(verification_no) == parseInt(otp)) {
-		alert("OTP SAME.....");
-	} else {
-		alert("Incorrect NO");
+submitBtn.addEventListener("click", async function () {
+
+	const otp = $("#txtOtp").val();
+	if (!otp) {
+		alert("Enter OTP");
+		return;
 	}
-}
+
+	try {
+		const response = await axios.post("http://localhost:3100/api/verify-otp", { email: _email, otp });
+
+		console.log({ response });
+		alert(response.data.message);
+
+		// slidePage.style.marginLeft = "-75%";
+		// bullet[current - 1].classList.add("active");
+		// progressCheck[current - 1].classList.add("active");
+		// progressText[current - 1].classList.add("active");
+		// current += 1;
+		alert('here');
+
+		bullet[current - 1].classList.add("active");
+		progressCheck[current - 1].classList.add("active");
+		progressText[current - 1].classList.add("active");
+		current += 1;
+		location.reload();
+		return;
+
+	} catch (error) {
+		console.log({ error });
+		console.log(error.response.data.message);
+		alert(error.response.data.message);
+		alert('here1');
+		return;
+	}
+
+});
 
 function sendEmail() {
 	var email = document.getElementById("email").value;
