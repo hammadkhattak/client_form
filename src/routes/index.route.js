@@ -19,7 +19,6 @@ router.post('/verify-otp', async (req, res) => {
 			}
 		});
 
-		console.log('here');
 		if (!user.isValidOtp) return res.status(400).send({ message: "Invalid OTP" });
 		if (Number(user.otp) === Number(otp)) {
 			await userService.update({
@@ -97,6 +96,15 @@ router.post('/signup', async (req, res) => {
 
 
 
+});
+router.get('/total-users', async (req, res) => {
+	try {
+		const users = await userService.findMany();
+		return res.status(200).send({ success: true, data: users });
+	} catch (error) {
+		console.log('Error in /total-users', { error });
+		return res.status(404).send({ error: true, message: 'There is some error in gettign all users' });
+	}
 });
 
 router.post('/test-email', async (req, res) => {

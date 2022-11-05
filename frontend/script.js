@@ -5,6 +5,7 @@ const nextBtnSec = document.querySelector(".next-1");
 const prevBtnThird = document.querySelector(".prev-2");
 const nextBtnThird = document.querySelector(".next-2");
 const prevBtnFourth = document.querySelector(".prev-3");
+const nextBtnFourth = document.querySelector(".next-3");
 const submitBtn = document.querySelector(".submit");
 const progressText = document.querySelectorAll(".step p");
 const progressCheck = document.querySelectorAll(".step .check");
@@ -84,14 +85,7 @@ nextBtnThird.addEventListener("click", async function (event) {
 
 
 submitBtn.addEventListener("click", function () {
-	// bullet[current - 1].classList.add("active");
-	// progressCheck[current - 1].classList.add("active");
-	// progressText[current - 1].classList.add("active");
-	// current += 1;
-	// setTimeout(function () {
-	// 	alert("Your Form Successfully Signed up");
-	// 	location.reload();
-	// }, 800);
+	location.reload();
 });
 
 prevBtnSec.addEventListener("click", function (event) {
@@ -119,16 +113,8 @@ prevBtnFourth.addEventListener("click", function (event) {
 	current -= 1;
 });
 
-// it will get the random number
-function getRandomValue() {
-	var ranomd_no = Math.floor(Math.random() * 200);
-	return ranomd_no;
-}
 
-// assigning the random value to the hidden text
-document.getElementById("txtVerificationNo").value = getRandomValue();
-
-submitBtn.addEventListener("click", async function () {
+nextBtnFourth.addEventListener("click", async function () {
 
 	const otp = $("#txtOtp").val();
 	if (!otp) {
@@ -137,9 +123,9 @@ submitBtn.addEventListener("click", async function () {
 	}
 
 	try {
+		await setTotalUsersCount();
 		const response = await axios.post("http://localhost:3100/api/verify-otp", { email: _email, otp });
 
-		console.log({ response });
 		alert(response.data.message);
 
 		// slidePage.style.marginLeft = "-75%";
@@ -147,27 +133,39 @@ submitBtn.addEventListener("click", async function () {
 		// progressCheck[current - 1].classList.add("active");
 		// progressText[current - 1].classList.add("active");
 		// current += 1;
-		alert('here');
 
+		slidePage.style.marginLeft = "-100%";
 		bullet[current - 1].classList.add("active");
 		progressCheck[current - 1].classList.add("active");
 		progressText[current - 1].classList.add("active");
 		current += 1;
-		location.reload();
+		// location.reload();
 		return;
 
 	} catch (error) {
-		console.log({ error });
-		console.log(error.response.data.message);
 		alert(error.response.data.message);
-		alert('here1');
 		return;
 	}
 
 });
 
-function sendEmail() {
-	var email = document.getElementById("email").value;
-	var verification_no = document.getElementById("txtVerificationNo").value;
-}
+const getAllUsersFromDB = async () => {
+	try {
+		const response = await axios.get("http://localhost:3100/api/total-users");
+		return response.data.data;
+	} catch (error) {
+		alert(error.response.data.message);
+		return;
+	}
+};
+
+const setTotalUsersCount = async () => {
+	const users = await getAllUsersFromDB();
+	$('#totalUsers').html(users.length);
+};
+
+$(async () => {
+	setTotalUsersCount();
+});
+
 
