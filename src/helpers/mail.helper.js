@@ -52,6 +52,7 @@ async function SendOTPEmail(email, otp) {
 	const html = messages.mailHTML(otp);
 
 	const info = await sendMail(email, subject, text, html);
+	// console.log({ info });
 	if (!info.accepted) {
 		return { error: 'error' };
 	}

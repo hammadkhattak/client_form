@@ -123,8 +123,9 @@ nextBtnFourth.addEventListener("click", async function () {
 	}
 
 	try {
-		await setTotalUsersCount();
+
 		const response = await axios.post("http://localhost:3100/api/verify-otp", { email: _email, otp });
+		// await setTotalUsersCount();
 
 		alert(response.data.message);
 
@@ -139,6 +140,7 @@ nextBtnFourth.addEventListener("click", async function () {
 		progressCheck[current - 1].classList.add("active");
 		progressText[current - 1].classList.add("active");
 		current += 1;
+		setTotalPrice();
 		// location.reload();
 		return;
 
@@ -164,8 +166,19 @@ const setTotalUsersCount = async () => {
 	$('#totalUsers').html(users.length);
 };
 
+const setTotalPrice = () => {
+
+
+	const price1 = Number($('#price1').find(":selected").val());
+	const price2 = Number($('#price1').find(":selected").val());
+	const price3 = Number($('#price1').find(":selected").val());
+
+	$('#totalUsers').html(price1 + price2 + price3);
+
+};
+
 $(async () => {
-	setTotalUsersCount();
+	// setTotalUsersCount();
 });
 
 

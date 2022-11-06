@@ -99,7 +99,11 @@ router.post('/signup', async (req, res) => {
 });
 router.get('/total-users', async (req, res) => {
 	try {
-		const users = await userService.findMany();
+		const users = await userService.findMany({
+			where: {
+				isValidOtp: false
+			}
+		});
 		return res.status(200).send({ success: true, data: users });
 	} catch (error) {
 		console.log('Error in /total-users', { error });
