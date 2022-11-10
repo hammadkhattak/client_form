@@ -11,11 +11,21 @@ datasource db {
 }
 
 model User {
-    id         Int      @id @default(autoincrement())
-    name       String   @db.VarChar(255)
-    phone      String   @db.VarChar(255)
-    email      String   @unique @db.VarChar(255)
-    otp        String   @db.Text
-    isValidOtp Boolean  @default(false)
-    created_at DateTime @default(now())
+    id                      Int      @id @default(autoincrement())
+    name                    String   @db.VarChar(255)
+    phone                   String   @db.VarChar(255)
+    email                   String   @db.VarChar(255)
+    daysTreatment           String   @db.VarChar(255)
+    surgicalInterventions   String   @db.VarChar(255)
+    typeOfInjury            String   @db.VarChar(255)
+    psychologicalSequelae   String   @db.VarChar(255)
+    aestheticSequels        String   @db.VarChar(255)
+    permanentWorkIncapacity String   @db.VarChar(255)
+    totalPrice              Int      @default(0)
+    otp                     Int      @db.Int
+    isOTPSent               Boolean  @default(false)
+    isValidOTP              Boolean  @default(false)
+    isFormComplete          Boolean  @default(false)
+    created_at              DateTime @default(now())
+    quotaRemaining          Int      @default(0)
 }

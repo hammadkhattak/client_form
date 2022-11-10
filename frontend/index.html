@@ -1,168 +1,202 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <title>Form</title>
-    <link rel="stylesheet" href="assets/style.css" />
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <input type="hidden" value="" id="txtVerificationNo" />
+	<head>
+		<meta charset="utf-8" />
+		<title>Form</title>
+		<link rel="stylesheet" href="assets/style.css" />
+		<!-- <script src="https://kit.fontawesome.com/a076d05399.js"></script> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<input type="hidden" value="" id="txtVerificationNo" />
 
-      <header>Details</header>
-      <div class="progress-bar">
-        <div class="step">
-          <p>Step 1</p>
-          <div class="bullet">
-            <span>1</span>
-          </div>
-          <div class="check fas fa-check"></div>
-        </div>
-        <div class="step">
-          <p>Step 2</p>
-          <div class="bullet">
-            <span>2</span>
-          </div>
-          <div class="check fas fa-check"></div>
-        </div>
-        <div class="step">
-          <p>Submit</p>
-          <div class="bullet">
-            <span>3</span>
-          </div>
-          <div class="check fas fa-check"></div>
-        </div>
-        <div class="step">
-          <p>Verify</p>
-          <div class="bullet">
-            <span>4</span>
-          </div>
-          <div class="check fas fa-check"></div>
-        </div>
-      </div>
-      <div class="form-outer">
-        <form>
-          <div class="page slide-page">
-            <div class="title">Choose</div>
-            <div class="field">
-              <div class="label">Días Tratamiento:</div>
-              <select name="cars" id="cars">
-                <option value="volvo">1 – 30</option>
-                <option value="saab">30 – 90</option>
-                <option value="mercedes">90 – 180</option>
-                <option value="audi">180 – 240</option>
-                <option value="audi">240 – 360</option>
-                <option value="audi">360 a más</option>
-              </select>
-            </div>
-            <div class="field">
-              <div class="label">Intervenciones Quirúrgicas:</div>
-              <select name="cars" id="cars">
-                <option value="volvo">11</option>
-                <option value="saab">2</option>
-                <option value="mercedes">3 o más</option>
-              </select>
-            </div>
-            <div class="field">
-              <div class="label">Tipo Lesión/Secuela Permanente</div>
-              <select name="cars" id="cars">
-                <option value="volvo">Cervicalgia</option>
-                <option value="saab">Contusión sin Fractura</option>
-                <option value="mercedes">Contusión con Fractura</option>
-                <option value="audi">
-                  Contusión con Fractura y Lesión Nerviosa
-                </option>
-                <option value="audi">
-                  Lesión Medular/Neurología/Amputación
-                </option>
-              </select>
-            </div>
-            <div class="field">
-              <button class="firstNext next">Next</button>
-            </div>
-          </div>
+			<header>Details</header>
+			<div class="progress-bar">
+				<div class="step">
+					<p>Step 1</p>
+					<div class="bullet">
+						<span>1</span>
+					</div>
+					<div class="check fas fa-check"></div>
+				</div>
+				<div class="step">
+					<p>Step 2</p>
+					<div class="bullet">
+						<span>2</span>
+					</div>
+					<div class="check fas fa-check"></div>
+				</div>
+				<div class="step">
+					<p>Submit</p>
+					<div class="bullet">
+						<span>3</span>
+					</div>
+					<div class="check fas fa-check"></div>
+				</div>
+				<div class="step">
+					<p>Verify</p>
+					<div class="bullet">
+						<span>4</span>
+					</div>
+					<div class="check fas fa-check"></div>
+				</div>
+			</div>
+			<div class="form-outer">
+				<form>
+					<!-- First Page Starts -->
+					<div class="page slide-page">
+						<div class="title">Choose</div>
+						<div class="field">
+							<div class="label">Días Tratamiento:</div>
+							<select name="cars" id="daysTreatment">
+								<option value="1-30">1 – 30</option>
+								<option value="30-90">30 – 90</option>
+								<option value="90-180">90 – 180</option>
+								<option value="180-240">180 – 240</option>
+								<option value="240-360">240 – 360</option>
+								<option value="360 a más">360 a más</option>
+							</select>
+						</div>
+						<div class="field">
+							<div class="label">Intervenciones Quirúrgicas:</div>
+							<select name="cars" id="surgicalInterventions">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3 o más">3 o más</option>
+							</select>
+						</div>
+						<div class="field">
+							<div class="label">Tipo Lesión/Secuela Permanente</div>
+							<select name="cars" id="typeOfInjury">
+								<option value="Cervicalgia">Cervicalgia</option>
+								<option value="Contusión sin Fractura">
+									Contusión sin Fractura
+								</option>
+								<option value="Contusión con Fractura">
+									Contusión con Fractura
+								</option>
+								<option value="Contusión con Fractura y Lesión Nerviosa">
+									Contusión con Fractura y Lesión Nerviosa
+								</option>
+								<option value="Lesión Medular/Neurología/Amputación">
+									Lesión Medular/Neurología/Amputación
+								</option>
+							</select>
+						</div>
+						<div class="field">
+							<button class="firstNext next">Next</button>
+						</div>
+					</div>
+					<!-- First Page Ends -->
 
-          <div class="page">
-            <div class="title">Choose</div>
-            <div class="field">
-              <div class="label">Secuelas Psicológicas</div>
-              <select name="cars" id="price1">
-                <option value="5000">Leve -> €5000</option>
-                <option value="10000">Moderado -> €10000</option>
-                <option value="25000">Grave -> €25000</option>
-                <option value="70000">Muy Grave -> €70000</option>
-              </select>
-            </div>
-            <div class="field">
-              <div class="label">Secuelas Estéticas</div>
-              <select name="cars" id="price2">
-                <option value="1500">Poco Visible-> €1500</option>
-                <option value="4000">Visible-> €4000</option>
-                <option value="10000">Muy Visible -> €10000</option>
-                <option value="30000">Grave -> €30000</option>
-              </select>
-            </div>
-            <div class="field">
-              <div class="label">Incapacidad Laboral Permanente</div>
-              <select name="cars" id="price3">
-                <option value="30000">Leve -> €30000</option>
-                <option value="10000">Moderado -> €10000</option>
-                <option value="25000">Grave -> €25000</option>
-                <option value="70000">Muy Grave -> €70000</option>
-              </select>
-            </div>
-            <!-- <div class="field">
+					<!-- 2nd Page Starts  prices-->
+					<div class="page">
+						<div class="title">Choose</div>
+						<div class="field">
+							<div class="label">Secuelas Psicológicas</div>
+							<select name="cars" id="price1">
+								<option value="5000" data-val="Leve -> €5000">
+									Leve -> €5000
+								</option>
+								<option value="10000" data-val="Moderado -> €10000">
+									Moderado -> €10000
+								</option>
+								<option value="25000" data-val="Grave -> €25000">
+									Grave -> €25000
+								</option>
+								<option value="70000" data-val="Muy Grave -> €70000">
+									Muy Grave -> €70000
+								</option>
+							</select>
+						</div>
+						<div class="field">
+							<div class="label">Secuelas Estéticas</div>
+							<select name="cars" id="price2">
+								<option value="1500" data-val="Poco Visible-> €1500">
+									Poco Visible-> €1500
+								</option>
+								<option value="4000" data-val="Visible-> €4000">
+									Visible-> €4000
+								</option>
+								<option value="10000" data-val="Muy Visible -> €10000">
+									Muy Visible -> €10000
+								</option>
+								<option value="30000" data-val="Grave -> €30000">
+									Grave -> €30000
+								</option>
+							</select>
+						</div>
+						<div class="field">
+							<div class="label">Incapacidad Laboral Permanente</div>
+							<select name="cars" id="price3">
+								<option value="30000" data-val="Leve -> €30000">
+									Leve -> €30000
+								</option>
+								<option value="10000" data-val="Moderado -> €10000">
+									Moderado -> €10000
+								</option>
+								<option value="25000" data-val="Grave -> €25000">
+									Grave -> €25000
+								</option>
+								<option value="70000" data-val="Muy Grave -> €70000">
+									Muy Grave -> €70000
+								</option>
+							</select>
+						</div>
+						<!-- <div class="field">
               <div class="label">Phone Number</div>
               <input type="Number">
             </div> -->
-            <div class="field btns">
-              <button class="prev-1 prev">Previous</button>
-              <button class="next-1 next">Next</button>
-            </div>
-          </div>
+						<div class="field btns">
+							<button class="prev-1 prev">Previous</button>
+							<button class="next-1 next">Next</button>
+						</div>
+					</div>
+					<!-- 2nd Page Ends prices -->
 
-          <div class="page">
-            <div class="title">Basic Info</div>
-            <div class="field">
-              <div class="label">Name</div>
-              <input id="name" type="text" />
-            </div>
-            <div class="field">
-              <div class="label">Email</div>
-              <input id="email" type="email" />
-              <!-- <select>
+					<!-- 3nd Page Starts  Info-->
+					<div class="page">
+						<div class="title">Basic Info</div>
+						<div class="field">
+							<div class="label">Name</div>
+							<input id="name" type="text" />
+						</div>
+						<div class="field">
+							<div class="label">Email</div>
+							<input id="email" type="email" />
+							<!-- <select>
                 <option>Male</option>
                 <option>Female</option>
                 <option>Other</option>
               </select> -->
-            </div>
-            <div class="field">
-              <div class="label">Phone Number</div>
-              <input id="phone" type="number" />
-            </div>
-            <div class="field btns">
-              <button class="prev-2 prev">Previous</button>
-              <!-- <button class="submit">Submit</button> -->
-              <button class="next-2 next">Next</button>
-            </div>
-          </div>
+						</div>
+						<div class="field">
+							<div class="label">Phone Number</div>
+							<input id="phone" type="text" />
+						</div>
+						<div class="field btns">
+							<button class="prev-2 prev">Previous</button>
+							<!-- <button class="submit">Submit</button> -->
+							<button class="next-2 next">Next</button>
+						</div>
+					</div>
+					<!-- 3nd Page Ends info -->
 
-          <div class="page">
-            <p class="otp-text">Enter OTP</p>
-            <input
-              type="text"
-              autocomplete="one-time-code"
-              inputmode="numeric"
-              id="txtOtp"
-              name="one-time-code"
-              class="otp"
-            />
-            <!-- <input type="submit" value="Submit" class="submit-btn"> -->
+					<!-- 4nd Page Starts OTP -->
+					<div class="page">
+						<p class="otp-text">Enter OTP</p>
+						<input
+							type="text"
+							autocomplete="one-time-code"
+							inputmode="numeric"
+							id="txtOtp"
+							name="one-time-code"
+							class="otp" />
+						<!-- <input type="submit" value="Submit" class="submit-btn"> -->
 
-            <!-- <div class="title">Login Details:</div>
+						<!-- <div class="title">Login Details:</div>
             <div class="field">
               <div class="label">Username</div>
               <input type="text">
@@ -171,33 +205,36 @@
               <div class="label">Password</div>
               <input type="password">
             </div> -->
-            <div class="field btns">
-              <button class="prev-3 prev">Previous</button>
-              <button class="next-3 next" type="button">Submit</button>
-            </div>
-          </div>
-          <div class="page">
-            <p class="otp-text" style="font-size: 26px; font-weight: bolder">
-              Total Users
-            </p>
-            <br />
-            <br />
-            <p
-              class="total-users"
-              id="totalUsers"
-              style="font-size: 16px; font-weight: bolder"
-            >
-              00
-            </p>
-            <br />
-            <div class="field btns">
-              <button class="submit">Finish</button>
-              <!-- <button class="submit" type="button">Submit</button> -->
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <script src="script.js"></script>
-  </body>
+						<div class="field btns">
+							<button class="prev-3 prev">Previous</button>
+							<button class="next-3 next" type="button">Submit</button>
+						</div>
+					</div>
+					<!-- 4nd Page Ends OTP -->
+
+					<!-- 5nd Page Starts Totoal Price -->
+					<div class="page">
+						<p class="otp-text" style="font-size: 26px; font-weight: bolder">
+							Total Price
+						</p>
+						<br />
+						<br />
+						<p
+							class="total-users"
+							id="totalUsers"
+							style="font-size: 16px; font-weight: bolder">
+							00
+						</p>
+						<br />
+						<div class="field btns">
+							<button class="submit">Finish</button>
+							<!-- <button class="submit" type="button">Submit</button> -->
+						</div>
+					</div>
+					<!-- 5nd Page Ends Total price-->
+				</form>
+			</div>
+		</div>
+		<script src="script.js"></script>
+	</body>
 </html>

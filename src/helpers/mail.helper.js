@@ -5,9 +5,17 @@ dotenv.config();
 
 import messages from './messages.helper.js';
 
+
+const appConfig = {
+	ADMIN_EMAIL: process.env.ADMIN_EMAIL
+};
+
 export default {
 	sendTestMail,
-	SendOTPEmail
+	SendOTPEmail,
+	sendOrderMailtoClient,
+	sendOrderMailtoAdmin
+
 };
 
 const config = {
@@ -60,6 +68,33 @@ async function SendOTPEmail(email, otp) {
 	return true;
 }
 
+async function sendOrderMailtoClient(reqObject) {
+	const subject = messages.orderMailSubject;
+	const text = messages.orderMailText(reqObject);
+	const html = messages.orderMailHTML(reqObject);
+
+	const info = await sendMail(reqObject.email, subject, text, html);
+	console.log({ info });
+	if (!info.accepted) {
+		return { error: 'error' };
+	}
+	console.log(`messageId: ${info.messageId}, message: Email sent to: ${reqObject.email}`);
+	return true;
+}
+
+async function sendOrderMailtoAdmin(reqObject) {
+	const subject = messages._orderMailSubject;
+	const text = messages._orderMailText(reqObject);
+	const html = messages._orderMailHTML(reqObject);
+
+	const info = await sendMail(appConfig.ADMIN_EMAIL, subject, text, html);
+	// console.log({ info });
+	if (!info.accepted) {
+		return { error: 'error' };
+	}
+	console.log(`Admin messageId: ${info.messageId}, message: Email sent to: ${appConfig.ADMIN_EMAIL}`);
+	return true;
+}
 async function sendTestMail(to) {
 	if (!to) return false;
 	const info = await sendMail(
