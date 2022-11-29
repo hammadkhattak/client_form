@@ -39,12 +39,8 @@ const validateEmail = (email) => {
 		);
 };
 const validatePhone = (phone) => {
-	console.log({ phone });
-	console.log('12', phone[12]);
-	console.log('0', phone[0]);
-	if (!phone || !phone.length) { console.log(1); return false; }
-	if (phone[0] !== '+') { console.log(2); console.log('1', phone[1]); return false; }
-	if (phone.length !== 12) { console.log(3, phone.length); return false; }
+	if (!phone || !phone.length) return false;
+	if (phone.length < 10) return false;
 	return true;
 };
 const setTotalPrice = () => {

@@ -65,7 +65,7 @@ app.use((err, req, res, next) => {
 (async () => {
 	const isDB = await prisma.$connect();
 	console.log('Databse connection established', { isDB });
-});
+})();
 
 app.listen(PORT, (err) => {
 	if (err) {
